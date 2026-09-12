@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mithaf Creates — Premium Digital Atelier</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="particles"></canvas>
+  <div id="cursor-glow"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="header">
+    <div class="brandmark">
+      <img src="assets/your-logo.png" alt="Mithaf Creates Logo" class="brandmark-logo" onerror="this.style.display='none'">
+      <span>MITHAF <span class="brand-sub">CREATES</span></span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-emblem reveal">
+        <img src="assets/your-logo.png" alt="Mithaf Creates Logo" class="hero-logo-img">
+      </div>
+      <div class="eyebrow reveal">Digital Atelier</div>
+      <h1 class="reveal">Mithaf <em>Creates</em></h1>
+      <p class="hero-tagline reveal">Think Beyond. Create Differently.</p>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+      <div class="eyebrow reveal">The Expertise</div>
+      <h2 class="section-title reveal">Designed for clarity,<br>built for impact.</h2>
+
+      <div class="services-grid">
+        <div class="service-card reveal" data-tilt>
+          <div class="service-plate">01 / WEB</div>
+          <h3>Website Design</h3>
+          <p>Bespoke digital platforms engineered with fluid interactions and editorial polish.</p>
+        </div>
+        <div class="service-card reveal" data-tilt>
+          <div class="service-plate">02 / AI</div>
+          <h3>AI Creative Ads</h3>
+          <p>High-converting campaign creative augmented by modern AI design workflows.</p>
+        </div>
+        <div class="service-card reveal" data-tilt>
+          <div class="service-plate">03 / BRAND</div>
+          <h3>Visual Identity</h3>
+          <p>Distinctive brand identities crafted with iconography, systems, and purpose.</p>
+        </div>
+        <div class="service-card reveal" data-tilt>
+          <div class="service-plate">04 / CONTENT</div>
+          <h3>Media Production</h3>
+          <p>Engaging digital content built to stand out and capture client attention.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT FOUNDER SECTION -->
+    <section id="about">
+      <div class="about-wrap">
+        <div class="about-portrait reveal">
+          <div class="gold-frame-accent"></div>
+          <div class="founder-img-wrapper">
+            <img src="assets/your-photo.png" alt="Mithaf - Founder" class="founder-photo">
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="eyebrow reveal">Founder & Lead</div>
+          <h2 class="section-title reveal" style="margin-bottom:24px;">About Mithaf</h2>
+          <p class="reveal">Mithaf Creates is a boutique design and technology practice focused on building elevated digital experiences for ambitious brands.</p>
+          <p class="reveal">Combining strategic visual design with clean code execution, every project is built to deliver exceptional quality, poise, and long-term business value.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <div class="contact-panel reveal">
+        <div class="eyebrow" style="justify-content:center;">Direct Inquiry</div>
+        <h2 class="section-title" style="margin-bottom:30px;">Let's build something<br>remarkable together.</h2>
+
+        <div class="contact-buttons">
+          <a class="btn" href="mailto:mithafcreates@gmail.com">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+            <span>Email Us</span>
+          </a>
+
+          <a class="btn" href="https://www.instagram.com/mithafcreates/" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2026 Mithaf Creates. All rights reserved.</div>
+    <div>Think Beyond. Create Differently.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

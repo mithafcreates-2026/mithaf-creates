@@ -1,0 +1,300 @@
+/* ==========================================================================
+   1. GLOBAL VARIABLES & BASE STYLES
+   ========================================================================== */
+:root {
+  --obsidian: #0a0907;
+  --obsidian-2: #100e0b;
+  --panel: rgba(20,18,14,0.65);
+  --panel-border: rgba(212,175,55,0.2);
+  --gold: #d4af37;
+  --gold-bright: #f3d989;
+  --gold-dim: #8a6d3b;
+  --ivory: #f2ead9;
+  --ivory-dim: rgba(242,234,217,0.65);
+  --serif: 'Fraunces', serif;
+  --sans: 'Manrope', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: radial-gradient(ellipse at 50% -10%, #1a160e 0%, var(--obsidian) 60%, #040302 100%);
+  color: var(--ivory);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+::selection { background: var(--gold-dim); color: var(--obsidian); }
+
+/* ==========================================================================
+   2. DYNAMIC BACKGROUND EFFECTS
+   ========================================================================== */
+#particles {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+
+#cursor-glow {
+  position: fixed; top: 0; left: 0; width: 500px; height: 500px;
+  border-radius: 50%; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+  transform: translate(-50%,-50%);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   3. HEADER & NAVIGATION
+   ========================================================================== */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 6vw;
+  transition: all 0.5s var(--ease-out);
+  backdrop-filter: blur(12px);
+}
+header.scrolled {
+  background: rgba(10, 9, 7, 0.85);
+  border-bottom: 1px solid var(--panel-border);
+  padding: 16px 6vw;
+}
+
+.brandmark {
+  font-family: var(--serif); font-size: 19px; letter-spacing: 0.05em; font-weight: 500;
+  display: flex; align-items: center; gap: 12px;
+}
+.brandmark-logo {
+  width: 34px; height: 34px; border-radius: 50%; object-fit: cover;
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 12px rgba(212,175,55,0.4);
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+nav ul { list-style: none; display: flex; gap: 40px; }
+nav a {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory-dim);
+  position: relative; padding-bottom: 4px; transition: color 0.4s var(--ease-out); text-decoration: none;
+}
+nav a::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+  background: var(--gold); transition: width 0.4s var(--ease-out);
+}
+nav a:hover { color: var(--gold-bright); }
+nav a:hover::after { width: 100%; }
+
+/* ==========================================================================
+   4. HERO SECTION
+   ========================================================================== */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; position: relative; padding: 120px 6vw 60px;
+}
+
+.hero-emblem {
+  width: 130px; height: 130px; margin: 0 auto 30px; position: relative; border-radius: 50%;
+  animation: float-hero 6s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
+}
+.hero-logo-img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  border: 1px solid var(--gold);
+}
+
+.hero h1 {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 8.5vw, 110px);
+  line-height: 1.05; letter-spacing: -0.01em;
+  background: linear-gradient(180deg, #ffffff 0%, var(--ivory) 50%, var(--gold-dim) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero h1 em {
+  font-style: italic;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.hero-tagline {
+  margin-top: 24px; font-size: clamp(14px, 1.5vw, 18px); letter-spacing: 0.15em;
+  color: var(--ivory-dim); text-transform: uppercase; font-weight: 300;
+}
+
+/* ==========================================================================
+   5. SECTIONS & REVEALS
+   ========================================================================== */
+section { position: relative; z-index: 2; padding: 120px 6vw; }
+
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+}
+.eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold-dim); }
+
+.section-title {
+  font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 4.5vw, 56px); line-height: 1.15;
+}
+
+/* ==========================================================================
+   6. SERVICES GRID (3D TILT CARDS)
+   ========================================================================== */
+.services-grid {
+  margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+  perspective: 1000px;
+}
+
+.service-card {
+  background: rgba(16, 14, 11, 0.7);
+  border: 1px solid var(--panel-border);
+  padding: 44px 32px; position: relative; border-radius: 4px;
+  backdrop-filter: blur(8px);
+  transform-style: preserve-3d;
+  transition: border-color 0.4s var(--ease-out), transform 0.1s ease-out, box-shadow 0.4s var(--ease-out);
+}
+.service-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.15);
+}
+.service-plate {
+  font-family: var(--serif); font-size: 11px; color: var(--gold-dim); letter-spacing: 0.2em; margin-bottom: 24px;
+}
+.service-card h3 {
+  font-family: var(--serif); font-weight: 400; font-size: 22px; margin-bottom: 14px; color: var(--ivory);
+}
+.service-card p {
+  font-size: 14px; line-height: 1.8; color: var(--ivory-dim); font-weight: 300;
+}
+
+/* ==========================================================================
+   7. ABOUT FOUNDER SECTION (FIXED PHOTO CONTAINER)
+   ========================================================================== */
+.about-wrap {
+  display: grid; grid-template-columns: 380px 1fr; gap: 70px; align-items: center;
+  max-width: 1200px; margin: 0 auto;
+}
+.about-portrait {
+  position: relative; width: 100%; max-width: 380px; aspect-ratio: 3 / 4;
+  border: 1px solid var(--panel-border); background: var(--obsidian-2);
+  overflow: hidden; border-radius: 4px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+  animation: float-subtle 6s ease-in-out infinite;
+}
+.founder-img-wrapper { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+.founder-photo {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center top !important;
+  display: block !important;
+  filter: contrast(1.05) brightness(0.95);
+  transition: transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
+}
+.about-portrait:hover .founder-photo {
+  transform: scale(1.05); filter: contrast(1.08) brightness(1);
+}
+
+.about-portrait .gold-frame-accent {
+  position: absolute; inset: 16px; border: 1px solid rgba(212, 175, 55, 0.35);
+  pointer-events: none; z-index: 2; transition: border-color 0.4s var(--ease-out);
+}
+.about-portrait:hover .gold-frame-accent { border-color: var(--gold); }
+
+.about-text p {
+  font-size: 16px; line-height: 1.9; color: var(--ivory-dim); font-weight: 300; margin-bottom: 22px;
+}
+.about-text p:first-of-type { color: var(--ivory); font-size: 18px; }
+
+/* ==========================================================================
+   8. CONTACT PANEL & DUAL BUTTONS (EMAIL + INSTAGRAM)
+   ========================================================================== */
+.contact-panel {
+  text-align: center; padding: 100px 6vw;
+  border-top: 1px solid var(--panel-border); border-bottom: 1px solid var(--panel-border);
+  background: rgba(16, 14, 11, 0.4);
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 36px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  border: 1px solid var(--gold-dim);
+  background: rgba(212,175,55,0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s var(--ease-out);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateY(100%);
+  transition: transform 0.5s var(--ease-out);
+  z-index: 0;
+}
+
+.btn span, .btn svg {
+  position: relative;
+  z-index: 1;
+  transition: color 0.5s var(--ease-out), stroke 0.5s var(--ease-out);
+}
+
+.btn:hover::before {
+  transform: translateY(0);
+}
+
+.btn:hover {
+  color: var(--obsidian);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(212,175,55,0.25);
+}
+
+.btn:hover svg {
+  stroke: var(--obsidian);
+}
+
+/* ==========================================================================
+   9. FOOTER & MEDIA QUERIES
+   ========================================================================== */
+footer {
+  padding: 30px 6vw; display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--ivory-dim); letter-spacing: 0.08em; flex-wrap: wrap; gap: 12px;
+}
+
+@keyframes float-hero {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(212,175,55,0.25); }
+  50% { box-shadow: 0 0 60px rgba(212,175,55,0.5); }
+}
+
+@media (max-width: 980px) {
+  .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .about-portrait { margin: 0 auto; max-width: 320px; }
+}
